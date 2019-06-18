@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package dslVersion="1.0.0.0" 
+        Id="702a4b7a-83dd-43c4-952b-5edab192a796" 
+        solutionId="702a4b7a-83dd-43c4-952b-5edab192a796" 
+        xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" 
+        name="ExApp01Basico"
+        sharePointProductVersion="16.0">
+  <features>
+        <featureReference itemId="f0516aad-e553-49f7-a5a3-c9ea626f4ef1" />
+  </features>
+</package>
