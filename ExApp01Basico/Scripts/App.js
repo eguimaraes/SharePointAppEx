@@ -29,3 +29,57 @@ function initializePage()
         alert('Failed to get user name. Error:' + args.get_message());
     }
 }
+
+function controles() {
+    var controlesFrame = document.getElementById("controlesFrame");
+    
+
+
+
+
+
+}
+
+
+function get_grids() { }
+
+function get_dados(list) {
+
+    var context = SP.ClientContext.get_current();
+    var user = context.get_web().get_currentUser();
+    var web = context.get_web();
+    var lista = web.get_lists().getByTitle(list);
+    var listItens = lista.getItems("");
+    context.load(user);
+    context.load(web);
+    context.load(lista);
+    context.load(listItens);
+
+
+    context.executeQueryAsync(onGetGetListSuccess, onGetGetListSuccess);
+        
+    function onGetGetListSuccess() {
+
+       var listEnumerator = collList.getEnumerator();
+
+        while (listEnumerator.moveNext()) {
+          var item = listEnumerator.get_current();
+          item.get
+        }
+       
+
+
+
+    }
+
+    // Esta função é executada se a chamada acima falhar
+    function onGetGetListSuccess(sender, args) {
+        alert('Failed to get user name. Error:' + args.get_message());
+    }
+
+
+
+
+}
+
+function get_dados_Ext(url, list) { }

@@ -42,9 +42,34 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="configuracao\configuracaoInstance\Elements.xml" />
+    <Content Include="configuracao\Elements.xml" />
+    <Content Include="configuracao\Schema.xml" />
+    <Content Include="dados\dadosInstance\Elements.xml" />
+    <Content Include="dados\Elements.xml" />
+    <Content Include="dados\Schema.xml" />
+    <Content Include="Features\Feature2\Feature2.Template.xml">
+      <DependentUpon>Feature2.feature</DependentUpon>
+    </Content>
+    <Content Include="Scripts\controle.js" />
     <Content Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="configuracao\configuracaoInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{85f15d95-d417-4188-b52a-4ad0c8c33a5e}</SharePointProjectItemId>
+    </None>
+    <None Include="configuracao\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{eb05748c-74eb-4623-bae3-6184fa344792}</SharePointProjectItemId>
+    </None>
+    <None Include="dados\dadosInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e723c82f-3c0d-4d24-8d66-b8b580a76abd}</SharePointProjectItemId>
+    </None>
+    <None Include="dados\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a5e4e09e-f588-4c88-abb2-cf20d23384dd}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Feature2\Feature2.feature">
+      <FeatureId>{d94fad6d-e784-4fab-8053-82b147fbb6b9}</FeatureId>
+    </None>
     <None Include="packages.config" />
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{1a4486bc-2aa8-4071-a0e9-48d5b02eea62}</SharePointProjectItemId>

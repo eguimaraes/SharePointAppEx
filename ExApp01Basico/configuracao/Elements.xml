@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <!-- Não altere o valor do atributo Name abaixo. Se ele não coincidir com o nome da pasta do item do projeto da lista, ocorrerá um erro quando o projeto for executado. -->
+    <ListTemplate
+        Name="configuracao"
+        Type="100"
+        BaseType="0"
+        OnQuickLaunch="TRUE"
+        SecurityBits="11"
+        Sequence="410"
+        DisplayName="configuracao"
+        Description="Minha Definição de Lista"
+        Image="/_layouts/15/images/itgen.png"/>
+</Elements>

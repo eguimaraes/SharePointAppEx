@@ -17,6 +17,7 @@
 
     <!-- Adicionar seu JavaScript ao arquivo a seguir -->
     <script type="text/javascript" src="../Scripts/App.js"></script>
+    <script type="text/javascript" src="../Scripts/Controle.js"></script>
 </asp:Content>
 
 <%-- A marcação no elemento Content a seguir será colocada na TitleArea da página --%>
@@ -28,10 +29,28 @@
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
 
     <div>
-        <p id="message">
+        <div id="messageFrame">
             <!-- O seguinte conteúdo será substituído pelo nome de usuário quando você executar o aplicativo. Consulte App.js -->
             initializing...
-        </p>
+        </div>
+
+         <div id="controlesFrame">
+            <input type="text" id="nr" /><br />
+            <input type="text" id="prefix" /><br />
+            <input type="text" id="lista" /><br />
+            <input type="button" onclick="controles()">Enviar<input />
+            
+        </div>
+
+         <div id="dadosFrame">
+            <!-- O seguinte conteúdo será substituído pelo nome de usuário quando você executar o aplicativo. Consulte App.js -->
+            <table id="tabela">
+               
+                <tr><td>Nome</td><td>Valor</td></tr>
+
+
+            </table>
+        </div>
     </div>
 
 </asp:Content>
