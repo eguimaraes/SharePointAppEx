@@ -22,7 +22,7 @@
 
 <%-- A marcação no elemento Content a seguir será colocada na TitleArea da página --%>
 <asp:Content ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
-    Page Title
+  Primeiro Exemplo de APP criando e recuperando Itens de Lista
 </asp:Content>
 
 <%-- A marcação e o script no elemento Content a seguir serão colocados no <corpo> da página --%>
@@ -30,20 +30,20 @@
 
     <div>
         <div id="messageFrame">
-            <!-- O seguinte conteúdo será substituído pelo nome de usuário quando você executar o aplicativo. Consulte App.js -->
-            initializing...
+           
+           Carregando os Dados
         </div>
 
          <div id="controlesFrame">
-            <input type="text" id="nr" /><br />
-            <input type="text" id="prefix" /><br />
-            <input type="text" id="lista" /><br />
-            <input type="button" onclick="controles()">Enviar<input />
+           <span>Numero</span> <input type="text" id="nr" /><br />
+            <span>Prefixo</span> <input type="text" id="prefix" /><br />
+            <span>Lista</span> <input type="text" id="lista" /><br />
+            <div id="btn" onclick="rpt_dados()">Criar</div><br />
             
         </div>
 
          <div id="dadosFrame">
-            <!-- O seguinte conteúdo será substituído pelo nome de usuário quando você executar o aplicativo. Consulte App.js -->
+           
             <table id="tabela">
                
                 <tr><td>Nome</td><td>Valor</td></tr>

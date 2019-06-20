@@ -1,4 +1,6 @@
-﻿'use strict';
+﻿
+
+
 
 ExecuteOrDelayUntilScriptLoaded(initializePage, "sp.js");
 
@@ -30,9 +32,21 @@ function initializePage()
     }
 }
 
-function controles() {
+function controles(dado) {
     var controlesFrame = document.getElementById("controlesFrame");
-    
+    var tabela = document.getElementById("tabela");
+    var linha = document.createElement("tr");
+    tabela.appendChild(linha);
+
+    for (i = 0; i < dado.length; i++) {
+    var celula = document.createElement("td");
+    celula.innerHTML = dado[i];
+    linha.appendChild(celula);
+    }
+}
+
+
+function get_grids() {
 
 
 
@@ -40,11 +54,9 @@ function controles() {
 
 }
 
-
-function get_grids() { }
-
 function get_dados(list) {
-
+    var tabela = document.getElementById("tabela");
+    tabela.innerHTML = "";
     var context = SP.ClientContext.get_current();
     var user = context.get_web().get_currentUser();
     var web = context.get_web();
@@ -56,15 +68,20 @@ function get_dados(list) {
     context.load(listItens);
 
 
-    context.executeQueryAsync(onGetGetListSuccess, onGetGetListSuccess);
+    context.executeQueryAsync(onGetGetListSuccess, onGetGetListFail);
         
     function onGetGetListSuccess() {
 
-       var listEnumerator = collList.getEnumerator();
+        var listEnumerator = listItens.getEnumerator();
 
         while (listEnumerator.moveNext()) {
           var item = listEnumerator.get_current();
-          item.get
+            var id = item.get_id();
+            var title = item.get_item('Title');
+            var valor = item.get_item('Valor');
+            var dado = [title, valor];
+            controles(dado);
+
         }
        
 
@@ -72,13 +89,78 @@ function get_dados(list) {
 
     }
 
-    // Esta função é executada se a chamada acima falhar
-    function onGetGetListSuccess(sender, args) {
+   
+    function onGetGetListFail(sender, args) {
         alert('Failed to get user name. Error:' + args.get_message());
     }
 
 
 
+
+}
+
+function set_dados(list,title,valor) {
+
+    var context = SP.ClientContext.get_current();
+    var user = context.get_web().get_currentUser();
+    var web = context.get_web();
+    var lista = web.get_lists().getByTitle(list);
+    var itemCreateInfo = new SP.ListItemCreationInformation();
+    var item = lista.addItem(itemCreateInfo);
+    item.set_item('Title', title);
+    item.set_item('Valor', valor);
+
+    item.update();
+    
+
+
+
+    context.load(user);
+    context.load(web);
+    context.load(lista);
+    context.load(item);
+  
+    
+
+    context.executeQueryAsync(onGetGetListSuccess, onGetGetListFail);
+
+    function onGetGetListSuccess() {
+        
+        
+        get_dados(list);
+        
+
+    
+    }
+
+
+    function onGetGetListFail(sender, args) {
+        alert('Failed to get user name. Error:' + args.get_message());
+    }
+
+
+
+
+}
+
+
+function rpt_dados() {
+
+    lista = document.getElementById("lista").value;
+    prefix = document.getElementById("prefix").value;
+    valor = lista;
+   
+    
+
+    for (i = 0; i < nr.value; i++) {
+
+        
+
+        set_dados(lista, prefix + i, valor + i);
+
+
+
+    }
 
 }
 
