@@ -208,7 +208,7 @@ function set_dados(list,title,valor) {
     function onGetGetListSuccess() {
         
         
-        get_dados(list);
+       
         
 
     
