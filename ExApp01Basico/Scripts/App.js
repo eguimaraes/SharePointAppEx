@@ -115,15 +115,18 @@ function get_dadosREST(list) {
             success: function (data) {
 
                 for (i = 0; i < data.d.results.length; i++) {
-                    var dados = data.d.results[i];
-                    var controlesFrame = document.getElementById("controlesFrame");                    
-                    var linha = document.createElement("tr");                    
+                    var dados = [data.d.results[i].Title, data.d.results[i].Valor];
+                    var controlesFrame = document.getElementById("controlesFrame");
+                    var linha = document.createElement("tr");    
+                    for (j = 0; j < dados.length; j++) {
+
+                                    
                     var celula = document.createElement("td");
-                    celula.innerHTML = dados.Title;
+                    celula.innerHTML = dados[j];
                     linha.appendChild(celula);                    
                     tabela.appendChild(linha);
 
-
+                    }
                     
 
                 }
