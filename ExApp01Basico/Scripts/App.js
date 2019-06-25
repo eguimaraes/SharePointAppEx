@@ -95,7 +95,8 @@ function get_dados(list) {
 }
 
 function get_dadosREST(list) {
-
+    var tabela = document.getElementById("tabela");
+    tabela.innerHTML = "";
     var itemType = getItemTypeForListName(list);  
 
     $.ajax
@@ -114,8 +115,16 @@ function get_dadosREST(list) {
             success: function (data) {
 
                 for (i = 0; i < data.d.results.length; i++) {
-                    dados = data.d.results[i];
-                    controles([dados.Title,dados.Valor]);
+                    var dados = data.d.results[i];
+                    var controlesFrame = document.getElementById("controlesFrame");                    
+                    var linha = document.createElement("tr");                    
+                    var celula = document.createElement("td");
+                    celula.innerHTML = dados.Title;
+                    linha.appendChild(celula);                    
+                    tabela.appendChild(linha);
+
+
+                    
 
                 }
             }
@@ -153,7 +162,7 @@ function set_dadosREST(list, title, valor) {
                 "X-HTTP-Method": "POST"
             },
             success: function (data, status, xhr) {
-                get_dadosREST(list)
+               
             },
             error: function (xhr, status, error) {
                 $("#messageFrame").empty().text(data.responseJSON.error);
@@ -161,7 +170,7 @@ function set_dadosREST(list, title, valor) {
         });  
 
 
-
+    
 
 }
 
@@ -250,7 +259,7 @@ function rpt_dadosREST() {
 
 
     }
-
+    get_dadosREST(lista);
 }
 
 function get_dados_Ext(url, list) { }
