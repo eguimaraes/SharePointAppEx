@@ -1,8 +1,4 @@
-﻿
-
-
-
-ExecuteOrDelayUntilScriptLoaded(initializePage, "sp.js");
+﻿ExecuteOrDelayUntilScriptLoaded(initializePage, "sp.js");
 
 function initializePage()
 {
@@ -23,7 +19,7 @@ function initializePage()
     // Esta função é executada se a chamada acima for bem-sucedida
     // Ella substitui o conteúdo do elemento 'message' pelo nome de usuário
     function onGetUserNameSuccess() {
-        $('#message').text('Hello ' + user.get_title());
+        $('#messageFrame').text('Hello ' + user.get_title());
     }
 
     // Esta função é executada se a chamada acima falhar
@@ -34,15 +30,15 @@ function initializePage()
 
 function controles(dado) {
     var controlesFrame = document.getElementById("controlesFrame");
-    var tabela = document.getElementById("tabela");
+    var tabela = document.getElementById("tabela");   
     var linha = document.createElement("tr");
-    tabela.appendChild(linha);
-
     for (i = 0; i < dado.length; i++) {
     var celula = document.createElement("td");
     celula.innerHTML = dado[i];
     linha.appendChild(celula);
     }
+
+    tabela.appendChild(linha);
 }
 
 
@@ -55,8 +51,7 @@ function get_grids() {
 }
 
 function get_dados(list) {
-    var tabela = document.getElementById("tabela");
-    tabela.innerHTML = "";
+
     var context = SP.ClientContext.get_current();
     var user = context.get_web().get_currentUser();
     var web = context.get_web();
@@ -98,6 +93,80 @@ function get_dados(list) {
 
 
 }
+
+function get_dadosREST(list) {
+
+    var itemType = getItemTypeForListName(list);  
+
+    $.ajax
+        ({
+            url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('" + list + "')/items?$select=Title,Valor",
+            type: "GET",           
+            headers:
+            {
+                "Accept": "application/json;odata=verbose",
+                "Content-Type": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*",
+                "X-HTTP-Method": null
+            },
+            cache: false,
+            success: function (data) {
+
+                for (i = 0; i < data.d.results.length; i++) {
+                    dados = data.d.results[i];
+                    controles([dados.Title,dados.Valor]);
+
+                }
+            }
+            ,
+            error: function (data) {
+                $("#messageFrame").empty().text(data.responseJSON.error);
+            }
+        });
+} 
+
+function set_dadosREST(list, title, valor) {
+
+    var itemType = getItemTypeForListName(list);  
+
+    
+    $.ajax
+        ({
+            url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('"+list+"')/items",
+            type: "POST",
+
+            data: JSON.stringify
+                ({
+                    __metadata:
+                    {
+                        type: itemType
+                    },
+                    Title: title,
+                    Valor: valor
+                }),
+            headers:
+            {
+                "Accept": "application/json;odata=verbose",
+                "Content-Type": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-HTTP-Method": "POST"
+            },
+            success: function (data, status, xhr) {
+                get_dadosREST(list)
+            },
+            error: function (xhr, status, error) {
+                $("#messageFrame").empty().text(data.responseJSON.error);
+            }
+        });  
+
+
+
+
+}
+
+
+
 
 function set_dados(list,title,valor) {
 
@@ -145,7 +214,7 @@ function set_dados(list,title,valor) {
 
 
 function rpt_dados() {
-
+    document.getElementById("tabela").innerHTML = "";
     lista = document.getElementById("lista").value;
     prefix = document.getElementById("prefix").value;
     valor = lista;
@@ -164,4 +233,29 @@ function rpt_dados() {
 
 }
 
+function rpt_dadosREST() {
+
+    lista = document.getElementById("lista").value;
+    prefix = document.getElementById("prefix").value;
+    valor = lista;
+
+
+
+    for (i = 0; i < nr.value; i++) {
+
+
+
+        set_dadosREST(lista, prefix + i, valor + i);
+
+
+
+    }
+
+}
+
 function get_dados_Ext(url, list) { }
+
+
+function getItemTypeForListName(name) {
+    return "SP.Data." + name.charAt(0).toUpperCase() + name.split(" ").join("").slice(1) + "ListItem";
+}

@@ -1,8 +1,9 @@
 ﻿/* Coloque os estilos personalizados abaixo */
-#btn{
+.btn{
     border-radius:5px;
     border:1px solid #808080;
     width:150px;
-    text-align:center
+    text-align:center;
+    cursor:pointer;
 
 }

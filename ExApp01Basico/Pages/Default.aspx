@@ -38,7 +38,8 @@
            <span>Numero</span> <input type="text" id="nr" /><br />
             <span>Prefixo</span> <input type="text" id="prefix" /><br />
             <span>Lista</span> <input type="text" id="lista" /><br />
-            <div id="btn" onclick="rpt_dados()">Criar</div><br />
+            <div id="btn" class="btn" onclick="rpt_dados()">Criar - JAVSCRIPT</div><br />
+            <div id="btnRest"class="btn" onclick="rpt_dadosREST()">Criar - REST</div><br />
             
         </div>
 
